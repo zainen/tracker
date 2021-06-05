@@ -9,6 +9,7 @@ const read = require('./helpers/reader')
 const path = require('path')
 
 const register = require('./routes/register')
+const departments = require('./routes/departments')
 
 
 const db = require('./db')
@@ -18,6 +19,7 @@ app.use(express.urlencoded())
 app.use(express.json())
 
 app.use('/api', register(db))
+app.use('/api', departments(db))
 
 
 app.get('/api/debug/reset',  (request, response) => {
