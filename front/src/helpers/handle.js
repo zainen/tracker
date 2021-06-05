@@ -5,8 +5,7 @@ const handleChange = (event, state, type) => {
 }
 const handleSubmit = (type, event, url, end, data) => {
   event.preventDefault()
-  axios[type](url + end, data).then(res => {
-  }).catch(err => console.log(err))
+  return axios[type](url + end, data).catch(err => console.log(err))
 }
 
 module.exports = {handleChange, handleSubmit}

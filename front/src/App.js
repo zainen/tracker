@@ -2,13 +2,18 @@ import './App.css';
 
 import Register from './components/Register'
 import AddDepartments from './components/AddDepartments'
-const {useState, useEffect} = require('react')
+
+import States from './helpers/states'
+import Departments from './components/Departments';
+
+
+const {useEffect} = require('react')
 const axios = require('axios')
 
 
 const apiURL = 'http://localhost:8000/api'
 function App() {
-  const [departments, setDepartments] = useState([])
+  const {form, setForm, departments, setDepartments, addDep, setAddDep} = States()
   useEffect(() => {
     Promise.all([
       axios.get(apiURL + '/departments')
@@ -16,12 +21,12 @@ function App() {
       setDepartments(all.data)
     }).catch(e => console.log(e))
   }, [])
-  console.log(departments)
 
   return (
     <div className="App">
-      <Register apiURL={apiURL}/>
-      <AddDepartments apiURL={apiURL}/>
+      <Register apiURL={apiURL} form={form} setForm={setForm}/>
+      <AddDepartments apiURL={apiURL} addDep={addDep} setAddDep={setAddDep} setDepartments={setDepartments} />
+      <Departments departments={departments} setDepartments={setDepartments} apiURL={apiURL} />
     </div>
   );
 }

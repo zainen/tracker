@@ -2,11 +2,7 @@ const {useState} = require('react')
 const {handleSubmit, handleChange} = require('../helpers/handle')
 
 export default function Register (props) {
-  const [form, setForm] = useState({
-    email: '',
-    fname: '',
-    lname: ''
-  })
+  const { form, setForm } = props
   return (
     <>
       <form onSubmit={e => handleSubmit('post', e, props.apiURL, '/register', form)}>
